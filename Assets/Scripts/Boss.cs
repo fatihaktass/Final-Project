@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,17 +8,23 @@ using UnityEngine.AI;
 
 public class Boss : MonoBehaviour
 {
-    [SerializeField] bool fieldOfView, attackZone, playerSpotted;
+    [SerializeField] bool fieldOfView, attackZone, rangedAttackZone, playerSpotted;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] Transform Player;
+    [SerializeField] Transform[] projectilePoints;
+    [SerializeField] GameObject projectile;
 
     bool bossDead;
     bool isAttacking;
+    bool rangedAttack;
+    bool firstDetection;
+    bool rangedAttackDelay;
 
     float bossHealth = 1000;
-    float attackStyle = 0;
-    float attackSpeed = 4f;
-    float maxAttackIndex = 3;
+    float attackType = 0;
+    float rangedAttackType = 2;
+
+    int projectilePoint;
 
     NavMeshAgent bossAgent;
     Animator bossAnim;
@@ -29,6 +37,11 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
+        if (!firstDetection && playerSpotted)
+        {
+            bossAnim.SetBool("Rage", true);
+            firstDetection = true;
+        }
         if (!bossDead)
         {
             MonstersActions();
@@ -37,10 +50,13 @@ public class Boss : MonoBehaviour
 
     private void MonstersActions()
     {
-        fieldOfView = Physics.CheckSphere(transform.position, 20f, playerLayer);
-        attackZone = Physics.CheckSphere(transform.position, 3f, playerLayer);
+        fieldOfView = Physics.CheckSphere(transform.position, 30f, playerLayer);
+        rangedAttackZone = Physics.CheckSphere(transform.position, 15f, playerLayer);
+        attackZone = Physics.CheckSphere(transform.position, 5f, playerLayer);
 
         Vector3 playerTransform = new(Player.position.x, transform.position.y, Player.position.z);
+
+        AttackStyleChanger();
 
         if (fieldOfView && !attackZone && !isAttacking || playerSpotted && !isAttacking)
         {
@@ -51,27 +67,36 @@ public class Boss : MonoBehaviour
             bossAnim.SetBool("Attacking", false);
         }
 
-        if (fieldOfView && attackZone && !isAttacking)
+        if (fieldOfView && rangedAttackZone && !attackZone && !isAttacking && rangedAttack && !rangedAttackDelay)
         {
             bossAgent.SetDestination(transform.position);
             transform.LookAt(transform.position);
             bossAnim.SetBool("Attacking", true);
             isAttacking = true;
-            Invoke(nameof(AttackResetter), attackSpeed);
+            rangedAttackDelay = true;
+            Invoke(nameof(AttackResetter), 1.8f);
+            Invoke(nameof(RangedAttackDelay), 10f);
+            Invoke(nameof(ProjectilePointChanger), .65f);
+        }
+
+        if (fieldOfView && attackZone && !isAttacking && !rangedAttack)
+        {
+            bossAgent.SetDestination(transform.position);
+            transform.LookAt(transform.position);
+            bossAnim.SetBool("Attacking", true);
+            isAttacking = true;
+            Invoke(nameof(AttackResetter), 2.2f);
         }
     }
 
     void AttackResetter()
     {
-        attackStyle++;
-
-        if (attackStyle > maxAttackIndex)
-        {
-            attackStyle = 0;
-        }
-
         isAttacking = false;
-        bossAnim.SetFloat("Attacks", attackStyle);
+    }
+
+    void RangedAttackDelay()
+    {
+        rangedAttackDelay = false;
     }
 
     public void DamageReceived(float amountOfDamage)
@@ -86,4 +111,46 @@ public class Boss : MonoBehaviour
         }
     }
 
+    void AttackStyleChanger()
+    {
+        if (rangedAttackZone && !attackZone && !isAttacking && !rangedAttackDelay)
+        {
+            rangedAttackType++;
+            if (rangedAttackType > 3)
+            {
+                rangedAttackType = 2;
+            }
+            rangedAttack = true;
+            bossAnim.SetFloat("Attacks", rangedAttackType);
+        }
+        if (rangedAttackZone && attackZone && !isAttacking)
+        {
+            attackType++;
+            if (attackType > 1)
+            {
+                attackType = 0;
+            }
+            rangedAttack = false;
+            bossAnim.SetFloat("Attacks", attackType);
+        }
+    }
+
+    void ProjectilePointChanger()
+    {
+        if (rangedAttackType == 2)
+        {
+            projectilePoint = 0;
+        }
+        else
+        {
+            projectilePoint = 1;
+        }
+
+        Instantiate(projectile, projectilePoints[projectilePoint].position, Quaternion.identity).GetComponent<Rigidbody>().AddForce(transform.forward * 50f, ForceMode.Impulse);
+    }
+
+    public bool AttackValueSender()
+    {
+        return isAttacking;
+    }
 }

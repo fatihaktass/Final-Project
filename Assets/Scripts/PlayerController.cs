@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CharacterController characterController;
 
     float playerSpeed;
+    float playerHealth = 100;
     float horizontalMovement;
     float verticalMovement;
     float attackStyle;
@@ -125,5 +126,16 @@ public class PlayerController : MonoBehaviour
     public bool GroundValueSender()
     {
         return isGrounded;
+    }
+
+    public void DamageReceived(float amountOfDamage)
+    {
+        playerHealth -= amountOfDamage;
+        Debug.Log(playerHealth);
+
+        if (playerHealth < 0)
+        {
+            playerHealth = 0;
+        }
     }
 }

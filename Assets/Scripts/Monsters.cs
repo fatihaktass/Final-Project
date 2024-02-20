@@ -86,4 +86,8 @@ public class Monsters : MonoBehaviour
         }
     }
 
+    public bool AttackValueSender()
+    {
+        return isAttacking;
+    }
 }

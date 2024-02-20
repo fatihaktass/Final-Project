@@ -110,7 +110,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 232
     - serializedVersion: 16
       name: AttackRight_Monkey_H
       takeName: AttackRight_Monkey_H
@@ -139,7 +139,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 295
     - serializedVersion: 16
       name: Block_MonkeyH
       takeName: Block_MonkeyH
@@ -226,7 +226,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 123
     - serializedVersion: 16
       name: GunRight_Monkey_H
       takeName: GunRight_Monkey_H
@@ -255,7 +255,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 596
     - serializedVersion: 16
       name: Hit_Monkey_H
       takeName: Hit_Monkey_H
