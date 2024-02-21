@@ -9,14 +9,16 @@ public class Monsters : MonoBehaviour
     [SerializeField] bool fieldOfView, attackZone, playerSpotted;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] Transform Player;
+    [SerializeField] GameObject[] monsterAttackPoints;
 
     bool monsterDead;
     bool isAttacking;
 
     float monsterHealth = 100;
-    float attackStyle = 0;
-    float attackSpeed = 2f;
-    float maxAttackIndex = 1;
+    float attackStyle;
+    float attackSpeed = 2.2f;
+
+    int monsterAttackIndex;
 
     NavMeshAgent monsterAgent;
     Animator monsterAnim;
@@ -42,35 +44,36 @@ public class Monsters : MonoBehaviour
 
         Vector3 playerTransform = new(Player.position.x, transform.position.y, Player.position.z);
 
-        if (fieldOfView && !attackZone || playerSpotted)
+        if ((fieldOfView && !attackZone || playerSpotted) && !isAttacking)
         {
             playerSpotted = true;
             monsterAgent.SetDestination(Player.position);
             transform.LookAt(playerTransform);
             monsterAnim.SetTrigger("Running");
             monsterAnim.SetBool("Attacking", false);
+            
         }
 
         if (fieldOfView && attackZone && !isAttacking)
         {
-            monsterAgent.SetDestination(Player.position);
+            monsterAgent.SetDestination(transform.position);
             transform.LookAt(playerTransform);
             monsterAnim.SetBool("Attacking", true);
             isAttacking = true;
-            Invoke(nameof(AttackResetter), attackSpeed);
+            monsterAttackPoints[(int)Mathf.RoundToInt(attackStyle)].SetActive(true);
+            Invoke(nameof(AttackResetter), attackSpeed);  
         }
     }
 
     void AttackResetter()
     {
+        isAttacking = false;
         attackStyle++;
-
-        if (attackStyle > maxAttackIndex)
+        if (attackStyle > 1)
         {
             attackStyle = 0;
         }
-
-        isAttacking = false;
+        foreach (GameObject item in monsterAttackPoints) { item.SetActive(false); }
         monsterAnim.SetFloat("Attacks", attackStyle);
     }
 

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,6 +11,7 @@ public class Boss : MonoBehaviour
     [SerializeField] Transform Player;
     [SerializeField] Transform[] projectilePoints;
     [SerializeField] GameObject projectile;
+    [SerializeField] AudioSource[] bossSFX;
 
     bool bossDead;
     bool isAttacking;
@@ -76,7 +75,7 @@ public class Boss : MonoBehaviour
             rangedAttackDelay = true;
             Invoke(nameof(AttackResetter), 1.8f);
             Invoke(nameof(RangedAttackDelay), 10f);
-            Invoke(nameof(ProjectilePointChanger), .65f);
+            Invoke(nameof(ProjectilePointChanger), .6f);
         }
 
         if (fieldOfView && attackZone && !isAttacking && !rangedAttack)
@@ -85,8 +84,14 @@ public class Boss : MonoBehaviour
             transform.LookAt(transform.position);
             bossAnim.SetBool("Attacking", true);
             isAttacking = true;
+            Invoke(nameof(AttackSFX), .7f);
             Invoke(nameof(AttackResetter), 2.2f);
         }
+    }
+
+    void AttackSFX()
+    {
+        bossSFX[Mathf.RoundToInt(attackType + 1)].Play();
     }
 
     void AttackResetter()
@@ -123,6 +128,7 @@ public class Boss : MonoBehaviour
             rangedAttack = true;
             bossAnim.SetFloat("Attacks", rangedAttackType);
         }
+
         if (rangedAttackZone && attackZone && !isAttacking)
         {
             attackType++;
@@ -139,14 +145,16 @@ public class Boss : MonoBehaviour
     {
         if (rangedAttackType == 2)
         {
-            projectilePoint = 0;
+            projectilePoint = 0; // Right Attack
         }
         else
         {
-            projectilePoint = 1;
+            projectilePoint = 1; // Left Attack
         }
 
-        Instantiate(projectile, projectilePoints[projectilePoint].position, Quaternion.identity).GetComponent<Rigidbody>().AddForce(transform.forward * 50f, ForceMode.Impulse);
+        bossSFX[0].Play();
+        Instantiate(projectile, projectilePoints[projectilePoint].position, Quaternion.identity).GetComponent<Rigidbody>().
+            AddForce(transform.forward * 50f, ForceMode.Impulse);
     }
 
     public bool AttackValueSender()

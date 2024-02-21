@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MonsterAttacks : MonoBehaviour
 {
-    bool damagePerm = false;
+    bool damagePerm = true;
     Monsters monstersScript;
 
     void Start()

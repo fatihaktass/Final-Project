@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,14 +10,22 @@ public class PlayerController : MonoBehaviour
     float horizontalMovement;
     float verticalMovement;
     float attackStyle;
+    float footstepSpeed;
 
+    [SerializeField] AudioSource[] footstepsSFX;
+    [SerializeField] AudioSource jumpSFX;
     [SerializeField] float jumpForce;
     [SerializeField] float gravity;
     [SerializeField] float groundCheckerRadius;
 
     [SerializeField] bool isGrounded;
+
     public bool actionPermission = true;
     bool isAttacking;
+    bool playerMoved;
+    bool playerFell;
+
+    int footstepsIndex;
 
     [SerializeField] LayerMask groundLayer;
 
@@ -33,6 +39,7 @@ public class PlayerController : MonoBehaviour
         if (actionPermission)
         {
             PlayerMovement();
+            FootstepFnc();
             PlayerSpeed();
             PlayerAttacking();
             Jump();
@@ -42,7 +49,6 @@ public class PlayerController : MonoBehaviour
 
     void PlayerMovement()
     {
-
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         verticalMovement = Input.GetAxisRaw("Vertical");
 
@@ -55,9 +61,12 @@ public class PlayerController : MonoBehaviour
         if (horizontalMovement != 0 || verticalMovement != 0)
         {
             playerSpeed = 10f;
+            footstepSpeed = 0.6f;
+
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 playerSpeed = 15f;
+                footstepSpeed = 0.3f;
             }
         }
         else
@@ -66,10 +75,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void FootstepFnc()
+    {
+        if ((horizontalMovement != 0 || verticalMovement != 0) && !playerMoved && isGrounded)
+        {
+            footstepsSFX[footstepsIndex].Play();
+            playerMoved = true;
+            Invoke(nameof(PlayerMovementBool), footstepSpeed);
+
+            footstepsIndex++;
+            if (footstepsIndex > 1)
+            {
+                footstepsIndex = 0;
+            }
+        }
+
+    }
+
+    void PlayerMovementBool()
+    {
+        playerMoved = false;
+    }
+
     void Gravity()
     {
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 2f, groundLayer);
-        Debug.DrawRay(transform.position, Vector3.down, Color.red, 2f);
+        //Debug.DrawRay(transform.position, Vector3.down, Color.red, 2f);
 
         gravityVector.y += gravity * Time.deltaTime;
         characterController.Move(gravityVector * Time.deltaTime);
@@ -86,6 +117,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             gravityVector.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+            jumpSFX.Play();
+            playerFell = false;
+        }
+
+        if (!playerFell && gravityVector.y == -3f)
+        {
+            jumpSFX.Play();
+            playerFell = true;
         }
     }
 
