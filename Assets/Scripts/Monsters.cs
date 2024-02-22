@@ -10,13 +10,15 @@ public class Monsters : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
     [SerializeField] Transform Player;
     [SerializeField] GameObject[] monsterAttackPoints;
+    [SerializeField] AudioSource monsterSFX;
+    [SerializeField] float attackSpeed = 2.2f;
+
 
     bool monsterDead;
     bool isAttacking;
 
     float monsterHealth = 100;
     float attackStyle;
-    float attackSpeed = 2.2f;
 
     int monsterAttackIndex;
 
@@ -51,7 +53,7 @@ public class Monsters : MonoBehaviour
             transform.LookAt(playerTransform);
             monsterAnim.SetTrigger("Running");
             monsterAnim.SetBool("Attacking", false);
-            
+
         }
 
         if (fieldOfView && attackZone && !isAttacking)
@@ -60,20 +62,28 @@ public class Monsters : MonoBehaviour
             transform.LookAt(playerTransform);
             monsterAnim.SetBool("Attacking", true);
             isAttacking = true;
-            monsterAttackPoints[(int)Mathf.RoundToInt(attackStyle)].SetActive(true);
-            Invoke(nameof(AttackResetter), attackSpeed);  
+            monsterAttackIndex = Mathf.RoundToInt(attackStyle);
+            monsterAttackPoints[monsterAttackIndex].GetComponent<SphereCollider>().enabled = true;
+            Invoke(nameof(AttackSFX), .7f);
+            Invoke(nameof(AttackResetter), attackSpeed);
+
         }
+    }
+
+    void AttackSFX()
+    {
+        monsterSFX.Play();
     }
 
     void AttackResetter()
     {
         isAttacking = false;
+        monsterAttackPoints[monsterAttackIndex].GetComponent<SphereCollider>().enabled = false;
         attackStyle++;
         if (attackStyle > 1)
         {
             attackStyle = 0;
         }
-        foreach (GameObject item in monsterAttackPoints) { item.SetActive(false); }
         monsterAnim.SetFloat("Attacks", attackStyle);
     }
 
@@ -86,6 +96,8 @@ public class Monsters : MonoBehaviour
             monsterHealth = 0;
             monsterAnim.SetTrigger("Dead");
             monsterDead = true;
+
+            Destroy(gameObject, 3f);
         }
     }
 

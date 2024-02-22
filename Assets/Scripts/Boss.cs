@@ -91,7 +91,7 @@ public class Boss : MonoBehaviour
 
     void AttackSFX()
     {
-        bossSFX[Mathf.RoundToInt(attackType + 1)].Play();
+        bossSFX[1].Play();
     }
 
     void AttackResetter()
