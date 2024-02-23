@@ -10,17 +10,20 @@ public class Monsters : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
     [SerializeField] Transform Player;
     [SerializeField] GameObject[] monsterAttackPoints;
-    [SerializeField] AudioSource monsterSFX;
+    [SerializeField] AudioSource attackSFX;
+    [SerializeField] AudioSource[] stepSFX;
     [SerializeField] float attackSpeed = 2.2f;
 
 
     bool monsterDead;
     bool isAttacking;
+    bool takingStep;
 
     float monsterHealth = 100;
     float attackStyle;
 
     int monsterAttackIndex;
+    int monsterStepIndex;
 
     NavMeshAgent monsterAgent;
     Animator monsterAnim;
@@ -53,7 +56,6 @@ public class Monsters : MonoBehaviour
             transform.LookAt(playerTransform);
             monsterAnim.SetTrigger("Running");
             monsterAnim.SetBool("Attacking", false);
-
         }
 
         if (fieldOfView && attackZone && !isAttacking)
@@ -66,13 +68,30 @@ public class Monsters : MonoBehaviour
             monsterAttackPoints[monsterAttackIndex].GetComponent<SphereCollider>().enabled = true;
             Invoke(nameof(AttackSFX), .7f);
             Invoke(nameof(AttackResetter), attackSpeed);
+        }
 
+        if (fieldOfView && !attackZone && !takingStep && !isAttacking)
+        {
+            Invoke(nameof(StepSFX), .35f);
+            takingStep = true;
         }
     }
 
     void AttackSFX()
     {
-        monsterSFX.Play();
+        attackSFX.Play();
+    }
+
+    void StepSFX()
+    {
+        monsterStepIndex++;
+        if (monsterStepIndex > 1)
+        {
+            monsterStepIndex = 0;
+        }
+
+        stepSFX[monsterStepIndex].Play();
+        takingStep = false;
     }
 
     void AttackResetter()

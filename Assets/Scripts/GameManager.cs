@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject objectInteract;
     [SerializeField] GameObject messagePanel;
     [SerializeField] TextMeshProUGUI messageTMP;
+    [SerializeField] TextMeshProUGUI interactTMP;
 
     PlayerController playerController;
     MouseInput mouseInput;
@@ -37,6 +38,19 @@ public class GameManager : MonoBehaviour
         else
         {
             Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+    public void ObjectInteract(string text, bool inInteraction)
+    {
+        if (inInteraction)
+        {
+            objectInteract.SetActive(true);
+            interactTMP.text = text;
+        }
+        else
+        {
+            objectInteract.SetActive(false);
         }
     }
 }
