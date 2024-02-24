@@ -4,6 +4,7 @@ public class CollectibleSword : MonoBehaviour
 {
     [SerializeField] GameObject swordInHand;
     [SerializeField] LayerMask playerLayer;
+    [SerializeField] AudioSource collectSFX;
 
     bool nearTheSword;
 
@@ -20,8 +21,10 @@ public class CollectibleSword : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
+                collectSFX.Play();
                 gameObject.SetActive(false);
                 swordInHand.SetActive(true);
+                FindAnyObjectByType<PlayerController>().tookTheSword = true;
                 Destroy(gameObject);
             }
         }

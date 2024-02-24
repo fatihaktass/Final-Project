@@ -11,19 +11,24 @@ public class Boss : MonoBehaviour
     [SerializeField] Transform Player;
     [SerializeField] Transform[] projectilePoints;
     [SerializeField] GameObject projectile;
+    [SerializeField] GameObject[] attackSide;
+    [SerializeField] Transform firstDestination;
     [SerializeField] AudioSource[] bossSFX;
+    [SerializeField] AudioSource[] stepSFX;
 
     bool bossDead;
     bool isAttacking;
     bool rangedAttack;
     bool firstDetection;
     bool rangedAttackDelay;
+    bool takingStep;
 
     float bossHealth = 1000;
     float attackType = 0;
     float rangedAttackType = 2;
 
     int projectilePoint;
+    int bossStepIndex;
 
     NavMeshAgent bossAgent;
     Animator bossAnim;
@@ -36,11 +41,6 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
-        if (!firstDetection && playerSpotted)
-        {
-            bossAnim.SetBool("Rage", true);
-            firstDetection = true;
-        }
         if (!bossDead)
         {
             MonstersActions();
@@ -51,7 +51,7 @@ public class Boss : MonoBehaviour
     {
         fieldOfView = Physics.CheckSphere(transform.position, 30f, playerLayer);
         rangedAttackZone = Physics.CheckSphere(transform.position, 15f, playerLayer);
-        attackZone = Physics.CheckSphere(transform.position, 5f, playerLayer);
+        attackZone = Physics.CheckSphere(transform.position, 6f, playerLayer);
 
         Vector3 playerTransform = new(Player.position.x, transform.position.y, Player.position.z);
 
@@ -84,8 +84,15 @@ public class Boss : MonoBehaviour
             transform.LookAt(transform.position);
             bossAnim.SetBool("Attacking", true);
             isAttacking = true;
+            attackSide[Mathf.RoundToInt(attackType)].GetComponent<SphereCollider>().enabled = true;
             Invoke(nameof(AttackSFX), .7f);
             Invoke(nameof(AttackResetter), 2.2f);
+        }
+
+        if (fieldOfView && !attackZone && !takingStep && !isAttacking)
+        {
+            Invoke(nameof(StepSFX), .5f);
+            takingStep = true;
         }
     }
 
@@ -93,6 +100,18 @@ public class Boss : MonoBehaviour
     {
         bossSFX[1].Play();
     }
+
+    void StepSFX()
+    {
+        bossStepIndex++;
+        if (bossStepIndex > 1)
+        {
+            bossStepIndex = 0;
+        }
+
+        stepSFX[bossStepIndex].Play();
+        takingStep = false;
+    }  
 
     void AttackResetter()
     {
@@ -131,6 +150,7 @@ public class Boss : MonoBehaviour
 
         if (rangedAttackZone && attackZone && !isAttacking)
         {
+            attackSide[Mathf.RoundToInt(attackType)].GetComponent<SphereCollider>().enabled = false;
             attackType++;
             if (attackType > 1)
             {
@@ -161,4 +181,29 @@ public class Boss : MonoBehaviour
     {
         return isAttacking;
     }
+
+    public void GoingRageSide()
+    {
+        bossAnim.SetTrigger("Running");
+        bossAgent.SetDestination(firstDestination.position);
+    }
+
+    void RageResetter()
+    {
+        bossAnim.SetBool("Rage", false);
+        bossAnim.SetTrigger("Running");
+        bossAgent.SetDestination(Player.position);
+        FindAnyObjectByType<GameManager>().CameraChanger(false);
+    }
+
+    public void Rage()
+    {
+        bossAnim.SetBool("Rage", true);
+        bossSFX[2].Play();
+        bossAgent.SetDestination(transform.position);
+        Invoke(nameof(RageResetter), 1.5f);
+        firstDetection = true;
+    }
+       
+   
 }

@@ -6,9 +6,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject objectInteract;
+    [SerializeField] GameObject door;
     [SerializeField] GameObject messagePanel;
     [SerializeField] TextMeshProUGUI messageTMP;
     [SerializeField] TextMeshProUGUI interactTMP;
+    [SerializeField] GameObject[] cameras;
+
+    [SerializeField]
+    AudioSource[] paperSFX;
+
 
     PlayerController playerController;
     MouseInput mouseInput;
@@ -33,7 +39,6 @@ public class GameManager : MonoBehaviour
         if (actionPerm)
         {
             Cursor.lockState = CursorLockMode.Locked;
-            messagePanel.SetActive(false);
         }
         else
         {
@@ -51,6 +56,37 @@ public class GameManager : MonoBehaviour
         else
         {
             objectInteract.SetActive(false);
+        }
+    }
+
+    public void CameraChanger(bool triggeredDoor)
+    {
+        if (!triggeredDoor)
+        {
+            cameras[0].SetActive(true);
+            cameras[1].SetActive(false);
+            PlayerActions(true);
+            door.GetComponent<Animator>().SetTrigger("Triggered");
+        }
+        if (triggeredDoor)
+        {
+            cameras[0].SetActive(false);
+            cameras[1].SetActive(true);
+            PlayerActions(false);
+        }
+    }
+
+    public void PaperSFX(bool isOpening)
+    {
+        if (isOpening)
+        {
+            paperSFX[0].Play();
+            messagePanel.SetActive(true);
+        }
+        else
+        {
+            paperSFX[1].Play();
+            messagePanel.SetActive(false);
         }
     }
 }

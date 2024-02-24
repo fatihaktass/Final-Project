@@ -23,6 +23,7 @@ public class MessagesAndNotes : MonoBehaviour
 
         if (nextToTheMessage && Input.GetKeyDown(KeyCode.F))
         {
+            gameManager.PaperSFX(true);
             switch (messageIndex)
             {
                 case 0:

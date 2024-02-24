@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool isGrounded;
 
     public bool actionPermission = true;
+    public bool tookTheSword;
+
     bool isAttacking;
     bool playerMoved;
     bool playerFell;
@@ -123,14 +125,14 @@ public class PlayerController : MonoBehaviour
 
         if (!playerFell && gravityVector.y == -3f)
         {
-            jumpSFX.Play();
+            footstepsSFX[footstepsIndex].Play();
             playerFell = true;
         }
     }
 
     void PlayerAttacking()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !isAttacking)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !isAttacking && tookTheSword)
         {
             isAttacking = true;
             Invoke(nameof(AttackResetter), 1.1f);
