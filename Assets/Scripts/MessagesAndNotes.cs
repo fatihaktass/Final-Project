@@ -16,10 +16,10 @@ public class MessagesAndNotes : MonoBehaviour
 
     void Update()
     {
-        nextToTheMessage = Physics.CheckSphere(transform.position, 2f, playerLayer);
+        nextToTheMessage = Physics.CheckSphere(transform.position, 5f, playerLayer);
 
         shadowObject.SetActive(nextToTheMessage);
-        gameManager.ObjectInteract("OKU", nextToTheMessage);
+       // gameManager.ObjectInteract("OKU", nextToTheMessage);
 
         if (nextToTheMessage && Input.GetKeyDown(KeyCode.F))
         {
@@ -27,12 +27,18 @@ public class MessagesAndNotes : MonoBehaviour
             switch (messageIndex)
             {
                 case 0:
-                    Destroy(gameObject);
+                    
                     gameManager.ShowMessage("Savasta oldugumuzun haberini aldim. Bu notu gorenin acilen yardima gelmesini istiyorum.");
                     gameManager.PlayerActions(false);
-                    gameManager.ObjectInteract("OKU", false);
+                    gameManager.ObjectInteract("", false);
+                    Destroy(gameObject);
                     break;
                 case 1:
+                    
+                    gameManager.ShowMessage("Onlar anlasmayi bozdular. O alcaklar bizlere savas acti! Kralin kizini kacirdilar. Ormandan gectiler. Onu  bulun!");
+                    gameManager.PlayerActions(false);
+                    gameManager.ObjectInteract("", false);
+                    Destroy(gameObject);
                     break;
             }
         }

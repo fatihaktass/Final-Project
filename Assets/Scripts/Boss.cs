@@ -22,6 +22,7 @@ public class Boss : MonoBehaviour
     bool firstDetection;
     bool rangedAttackDelay;
     bool takingStep;
+    bool fightWithPlayer;
 
     float bossHealth = 1000;
     float attackType = 0;
@@ -32,11 +33,13 @@ public class Boss : MonoBehaviour
 
     NavMeshAgent bossAgent;
     Animator bossAnim;
+    GameManager gameManager;
 
     private void Start()
     {
         bossAgent = GetComponent<NavMeshAgent>();
         bossAnim = GetComponent<Animator>();
+        gameManager = FindAnyObjectByType<GameManager>();
     }
 
     private void Update()
@@ -49,8 +52,8 @@ public class Boss : MonoBehaviour
 
     private void MonstersActions()
     {
-        fieldOfView = Physics.CheckSphere(transform.position, 30f, playerLayer);
-        rangedAttackZone = Physics.CheckSphere(transform.position, 15f, playerLayer);
+        fieldOfView = Physics.CheckSphere(transform.position, 45f, playerLayer);
+        rangedAttackZone = Physics.CheckSphere(transform.position, 30f, playerLayer);
         attackZone = Physics.CheckSphere(transform.position, 6f, playerLayer);
 
         Vector3 playerTransform = new(Player.position.x, transform.position.y, Player.position.z);
@@ -94,6 +97,12 @@ public class Boss : MonoBehaviour
             Invoke(nameof(StepSFX), .5f);
             takingStep = true;
         }
+
+        if (!fightWithPlayer && playerSpotted)
+        {
+            gameManager.ChangeMusic(2);
+            fightWithPlayer = true;
+        }
     }
 
     void AttackSFX()
@@ -126,12 +135,15 @@ public class Boss : MonoBehaviour
     public void DamageReceived(float amountOfDamage)
     {
         bossHealth -= amountOfDamage;
+        gameManager.BossHealthUpdater(bossHealth);
+
 
         if (bossHealth <= 0)
         {
             bossHealth = 0;
             bossAnim.SetTrigger("Dead");
             bossDead = true;
+            gameManager.ChangeMusic(3); // FinishedMusic
         }
     }
 
@@ -185,6 +197,7 @@ public class Boss : MonoBehaviour
     public void GoingRageSide()
     {
         bossAnim.SetTrigger("Running");
+        gameManager.ChangeMusic(1); // FirstMeetingWithBoss
         bossAgent.SetDestination(firstDestination.position);
     }
 
@@ -193,6 +206,7 @@ public class Boss : MonoBehaviour
         bossAnim.SetBool("Rage", false);
         bossAnim.SetTrigger("Running");
         bossAgent.SetDestination(Player.position);
+        gameManager.BossHealthSliderActive();
         FindAnyObjectByType<GameManager>().CameraChanger(false);
     }
 

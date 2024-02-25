@@ -24,6 +24,7 @@ public class CollectibleSword : MonoBehaviour
                 collectSFX.Play();
                 gameObject.SetActive(false);
                 swordInHand.SetActive(true);
+                FindAnyObjectByType<GameManager>().ObjectInteract("", false);
                 FindAnyObjectByType<PlayerController>().tookTheSword = true;
                 Destroy(gameObject);
             }

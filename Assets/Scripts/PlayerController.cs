@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -31,9 +32,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] LayerMask groundLayer;
 
+    GameManager gameManager;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        gameManager = FindAnyObjectByType<GameManager>();
     }
 
     void Update()
@@ -172,11 +176,12 @@ public class PlayerController : MonoBehaviour
     public void DamageReceived(float amountOfDamage)
     {
         playerHealth -= amountOfDamage;
-        Debug.Log(playerHealth);
+        gameManager.PlayerHealthUpdater(playerHealth);
 
         if (playerHealth < 0)
         {
             playerHealth = 0;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

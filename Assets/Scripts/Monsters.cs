@@ -44,7 +44,7 @@ public class Monsters : MonoBehaviour
 
     private void MonstersActions()
     {
-        fieldOfView = Physics.CheckSphere(transform.position, 20f, playerLayer);
+        fieldOfView = Physics.CheckSphere(transform.position, 40f, playerLayer);
         attackZone = Physics.CheckSphere(transform.position, 3f, playerLayer);
 
         Vector3 playerTransform = new(Player.position.x, transform.position.y, Player.position.z);
