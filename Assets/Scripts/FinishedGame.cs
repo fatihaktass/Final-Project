@@ -1,23 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FinishedGame : MonoBehaviour
 {
-    [SerializeField] GameObject finalPanel;
+    [SerializeField] GameObject finalPanel, playerHealth;
+    public bool deadMonsters;
+    GameManager gameManager;
 
-    private void OnTriggerEnter(Collider other)
+    public List<GameObject> MonstersInHieararchy;
+
+    private void Start()
     {
-        if (other.CompareTag("Player"))
+        gameManager = FindAnyObjectByType<GameManager>();
+        StopCoroutine(Finish());
+    }
+
+    private void Update()
+    {
+        if(MonstersInHieararchy.Count == 0)
         {
-            finalPanel.GetComponentInParent<Animator>().SetTrigger("Finished");
-            FindAnyObjectByType<GameManager>().ChangeMusic(4); // finish;
-            FindAnyObjectByType<GameManager>().PlayerActions(false);
-            Invoke(nameof(ExitGame), 10f);
-            Destroy(gameObject);
+            deadMonsters = true;
         }
     }
 
-    void ExitGame()
+    private void OnTriggerEnter(Collider other)
     {
-        Application.Quit();
+        if (other.CompareTag("Player") && deadMonsters)
+        {
+            playerHealth.SetActive(false);
+            finalPanel.GetComponentInParent<Animator>().SetTrigger("Finished");
+            gameManager.ChangeMusic(0); // finish;
+            gameManager.PlayerActions(false);
+            StartCoroutine(Finish());
+        }
+    }
+
+    IEnumerator Finish()
+    {
+        yield return new WaitForSeconds(10f);
+        gameManager.GoToMenu();
     }
 }

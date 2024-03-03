@@ -2363,7 +2363,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 227.3, y: 108.2, z: 271.5}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4773816123235778307}
@@ -2386,12 +2386,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   jumpSFX: {fileID: 0}
+  swordInHand: {fileID: 5443223225742988566}
   jumpForce: 3
   gravity: -14
   groundCheckerRadius: 0.5
   isGrounded: 0
   actionPermission: 1
-  tookTheSword: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 8

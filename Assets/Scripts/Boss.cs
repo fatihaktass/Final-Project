@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class Boss : MonoBehaviour
 {
-    [SerializeField] bool fieldOfView, attackZone, rangedAttackZone, playerSpotted;
+    [SerializeField] bool fieldOfView, attackZone, rangedAttackZone, playerSpotted, rangedIn;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] Transform Player;
     [SerializeField] Transform[] projectilePoints;
@@ -52,9 +52,10 @@ public class Boss : MonoBehaviour
 
     private void MonstersActions()
     {
-        fieldOfView = Physics.CheckSphere(transform.position, 45f, playerLayer);
-        rangedAttackZone = Physics.CheckSphere(transform.position, 30f, playerLayer);
-        attackZone = Physics.CheckSphere(transform.position, 6f, playerLayer);
+        fieldOfView = Physics.CheckSphere(transform.position, 30f, playerLayer);
+        rangedAttackZone = Physics.CheckSphere(transform.position, 20f, playerLayer);
+        rangedIn = Physics.CheckSphere(transform.position, 10f, playerLayer);
+        attackZone = Physics.CheckSphere(transform.position, 5f, playerLayer);
 
         Vector3 playerTransform = new(Player.position.x, transform.position.y, Player.position.z);
 
@@ -69,10 +70,10 @@ public class Boss : MonoBehaviour
             bossAnim.SetBool("Attacking", false);
         }
 
-        if (fieldOfView && rangedAttackZone && !attackZone && !isAttacking && rangedAttack && !rangedAttackDelay)
+        if (rangedAttackZone && !rangedIn && !attackZone && !isAttacking && rangedAttack && !rangedAttackDelay)
         {
             bossAgent.SetDestination(transform.position);
-            transform.LookAt(transform.position);
+            transform.LookAt(playerTransform);
             bossAnim.SetBool("Attacking", true);
             isAttacking = true;
             rangedAttackDelay = true;
@@ -143,13 +144,13 @@ public class Boss : MonoBehaviour
             bossHealth = 0;
             bossAnim.SetTrigger("Dead");
             bossDead = true;
-            gameManager.ChangeMusic(3); // FinishedMusic
+            gameManager.TeleportSFX();
         }
     }
 
     void AttackStyleChanger()
     {
-        if (rangedAttackZone && !attackZone && !isAttacking && !rangedAttackDelay)
+        if (rangedAttackZone && !rangedIn && !attackZone && !isAttacking && !rangedAttackDelay)
         {
             rangedAttackType++;
             if (rangedAttackType > 3)
@@ -160,7 +161,7 @@ public class Boss : MonoBehaviour
             bossAnim.SetFloat("Attacks", rangedAttackType);
         }
 
-        if (rangedAttackZone && attackZone && !isAttacking)
+        if (rangedIn && attackZone && !isAttacking)
         {
             attackSide[Mathf.RoundToInt(attackType)].GetComponent<SphereCollider>().enabled = false;
             attackType++;

@@ -24,14 +24,7 @@ public class MessagesAndNotes : MonoBehaviour
             switch (messageIndex)
             {
                 case 0:
-                    gameManager.ShowMessage("Savasta oldugumuzun haberini aldim. Bu notu gorenin acilen yardima gelmesini istiyorum.");
-                    gameManager.PlayerActions(false);
-                    gameManager.ObjectInteract("", false);
-                    Destroy(gameObject);
-                    break;
-                case 1:
-                    
-                    gameManager.ShowMessage("Onlar anlasmayi bozdular. O alcaklar bizlere savas acti! Kralin kizini kacirdilar. Ormandan gectiler. Onu  bulun!");
+                    gameManager.ShowMessage("Onlar anlasmayi bozdular. Vinictumlar! Gordugunuz yerde kacin! Koyumuzu ele gecirdiler. Bizi goce zorladilar. ");
                     gameManager.PlayerActions(false);
                     gameManager.ObjectInteract("", false);
                     Destroy(gameObject);

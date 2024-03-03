@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CollectibleSword : MonoBehaviour
 {
-    [SerializeField] GameObject swordInHand;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] AudioSource collectSFX;
 
@@ -11,6 +10,7 @@ public class CollectibleSword : MonoBehaviour
     private void Start()
     {
         gameManager = FindAnyObjectByType<GameManager>();
+        FindAnyObjectByType<PlayerController>().Sword(false);
     }
 
     void SwordItem()
@@ -20,9 +20,8 @@ public class CollectibleSword : MonoBehaviour
         {
             collectSFX.Play();
             gameObject.SetActive(false);
-            swordInHand.SetActive(true);
             gameManager.ObjectInteract("", false);
-            FindAnyObjectByType<PlayerController>().tookTheSword = true;
+            FindAnyObjectByType<PlayerController>().Sword(true);
             Destroy(gameObject);
         }
     }

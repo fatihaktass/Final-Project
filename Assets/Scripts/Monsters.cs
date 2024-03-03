@@ -14,12 +14,11 @@ public class Monsters : MonoBehaviour
     [SerializeField] AudioSource[] stepSFX;
     [SerializeField] float attackSpeed = 2.2f;
 
-
     bool monsterDead;
     bool isAttacking;
     bool takingStep;
 
-    float monsterHealth = 100;
+    public float monsterHealth = 100;
     float attackStyle;
 
     int monsterAttackIndex;

@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] AudioSource[] footstepsSFX;
     [SerializeField] AudioSource jumpSFX;
+    [SerializeField] GameObject swordInHand;
     [SerializeField] float jumpForce;
     [SerializeField] float gravity;
     [SerializeField] float groundCheckerRadius;
@@ -22,7 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool isGrounded;
 
     public bool actionPermission = true;
-    public bool tookTheSword;
+    public static bool tookTheSword;
 
     bool isAttacking;
     bool playerMoved;
@@ -38,6 +39,10 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         gameManager = FindAnyObjectByType<GameManager>();
+
+        if (tookTheSword)
+            Sword(true);
+
     }
 
     void Update()
@@ -182,5 +187,20 @@ public class PlayerController : MonoBehaviour
             playerHealth = 0;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+    }
+
+    public void Sword(bool hadSword)
+    {
+        if (hadSword)
+        {
+            tookTheSword = true;
+            swordInHand.SetActive(true);
+        }
+        else
+        {
+            tookTheSword = false;
+            swordInHand.SetActive(false);
+        }
+
     }
 }

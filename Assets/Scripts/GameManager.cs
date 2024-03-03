@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject[] cameras;
     [SerializeField] GameObject escMenu, escMenuButtons, settings;
     [SerializeField] TextMeshProUGUI tpText;
+    [SerializeField] GameObject teleportObj;
 
     [SerializeField] AudioSource[] paperSFX;
     [SerializeField] AudioSource[] musics;
@@ -186,6 +187,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
+    public void QuitApp()
+    {
+        Application.Quit();
+    }
+
     public void ChangeMusic(int musicIndex)
     {
         switch (musicIndex)
@@ -208,10 +214,35 @@ public class GameManager : MonoBehaviour
                 musics[2].Stop();
                 musics[3].Play();
                 break;
+            case 4:
+                musics[0].Stop();
+                musics[1].Stop();
+                musics[2].Stop();
+                musics[3].Stop();
+                musics[4].Play();
+                break;
 
         }
     }
 
+    public void TeleportSFX()
+    {
+        teleportObj.SetActive(true);
+        ChangeMusic(3);
+    }
+
+    public void Teleporting(bool inPortal, float loadingPercent)
+    {
+        if (inPortal)
+        {
+            tpText.gameObject.SetActive(true);
+            tpText.text = "ISINLANILIYOR  %" + Mathf.RoundToInt(loadingPercent).ToString();
+        }
+        else
+        {
+            tpText.gameObject.SetActive(false);
+        }
+    }
 
     public void PlayerHealthUpdater(float playerHealth)
     {
