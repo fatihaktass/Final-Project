@@ -6,28 +6,39 @@ public class CollectibleSword : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
     [SerializeField] AudioSource collectSFX;
 
-    bool nearTheSword;
+    GameManager gameManager;
 
-    void Update()
+    private void Start()
     {
-        SwordItem();
+        gameManager = FindAnyObjectByType<GameManager>();
     }
 
     void SwordItem()
     {
-        nearTheSword = Physics.CheckSphere(transform.position, 2f, playerLayer);
-        FindAnyObjectByType<GameManager>().ObjectInteract("AL", nearTheSword);
-        if (nearTheSword)
+        gameManager.ObjectInteract("AL", true);
+        if (Input.GetKey(KeyCode.F))
         {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                collectSFX.Play();
-                gameObject.SetActive(false);
-                swordInHand.SetActive(true);
-                FindAnyObjectByType<GameManager>().ObjectInteract("", false);
-                FindAnyObjectByType<PlayerController>().tookTheSword = true;
-                Destroy(gameObject);
-            }
+            collectSFX.Play();
+            gameObject.SetActive(false);
+            swordInHand.SetActive(true);
+            gameManager.ObjectInteract("", false);
+            FindAnyObjectByType<PlayerController>().tookTheSword = true;
+            Destroy(gameObject);
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SwordItem();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            gameManager.ObjectInteract("OKU", false);
         }
     }
 }

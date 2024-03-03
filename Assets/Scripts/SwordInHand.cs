@@ -16,17 +16,21 @@ public class SwordInHand : MonoBehaviour
 
     private void Update()
     {
-        if (!playerController.AttackValueSender())
+        if (playerController.actionPermission)
         {
-            damagePerm = true;
-            nullObject = true;
-            swordNotHit.Stop();
+            if (!playerController.AttackValueSender())
+            {
+                damagePerm = true;
+                nullObject = true;
+                swordNotHit.Stop();
+            }
+            if (playerController.AttackValueSender() == true && nullObject)
+            {
+                nullObject = false;
+                swordNotHit.Play();
+            }
         }
-        if (playerController.AttackValueSender() == true && nullObject)
-        {
-            nullObject = false;
-            swordNotHit.Play();
-        }
+        
     }
 
     private void OnTriggerEnter(Collider other)

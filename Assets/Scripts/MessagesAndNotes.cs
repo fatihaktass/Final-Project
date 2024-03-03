@@ -5,7 +5,6 @@ public class MessagesAndNotes : MonoBehaviour
     [SerializeField] int messageIndex;
     [SerializeField] GameObject shadowObject;
     [SerializeField] LayerMask playerLayer;
-    bool nextToTheMessage;
 
     GameManager gameManager;
 
@@ -14,20 +13,17 @@ public class MessagesAndNotes : MonoBehaviour
         gameManager = FindAnyObjectByType<GameManager>();
     }
 
-    void Update()
+    void Message()
     {
-        nextToTheMessage = Physics.CheckSphere(transform.position, 5f, playerLayer);
+        shadowObject.SetActive(true);
+        gameManager.ObjectInteract("OKU", true);
 
-        shadowObject.SetActive(nextToTheMessage);
-       // gameManager.ObjectInteract("OKU", nextToTheMessage);
-
-        if (nextToTheMessage && Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKey(KeyCode.F))
         {
             gameManager.PaperSFX(true);
             switch (messageIndex)
             {
                 case 0:
-                    
                     gameManager.ShowMessage("Savasta oldugumuzun haberini aldim. Bu notu gorenin acilen yardima gelmesini istiyorum.");
                     gameManager.PlayerActions(false);
                     gameManager.ObjectInteract("", false);
@@ -41,6 +37,23 @@ public class MessagesAndNotes : MonoBehaviour
                     Destroy(gameObject);
                     break;
             }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Message();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            shadowObject.SetActive(false);
+            gameManager.ObjectInteract("OKU", false);
         }
     }
 }

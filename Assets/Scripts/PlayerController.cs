@@ -105,8 +105,7 @@ public class PlayerController : MonoBehaviour
 
     void Gravity()
     {
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 2f, groundLayer);
-        //Debug.DrawRay(transform.position, Vector3.down, Color.red, 2f);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.3f, groundLayer);
 
         gravityVector.y += gravity * Time.deltaTime;
         characterController.Move(gravityVector * Time.deltaTime);

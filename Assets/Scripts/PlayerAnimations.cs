@@ -13,9 +13,12 @@ public class PlayerAnimations : MonoBehaviour
 
     void Update()
     {
-        playerAnims.SetFloat("Attacks", playerController.AttackStyleSender());
-        playerAnims.SetFloat("PlayerSpeed", playerController.SpeedValueSender());
-        playerAnims.SetBool("Grounded", playerController.GroundValueSender());
-        playerAnims.SetBool("Attacking", playerController.AttackValueSender());
+        if (playerController.actionPermission == true)
+        {
+            playerAnims.SetFloat("Attacks", playerController.AttackStyleSender());
+            playerAnims.SetFloat("PlayerSpeed", playerController.SpeedValueSender());
+            playerAnims.SetBool("Grounded", playerController.GroundValueSender());
+            playerAnims.SetBool("Attacking", playerController.AttackValueSender());
+        }
     }
 }

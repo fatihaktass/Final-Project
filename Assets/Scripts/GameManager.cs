@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI interactTMP;
     [SerializeField] GameObject[] cameras;
     [SerializeField] GameObject escMenu, escMenuButtons, settings;
+    [SerializeField] TextMeshProUGUI tpText;
 
     [SerializeField] AudioSource[] paperSFX;
     [SerializeField] AudioSource[] musics;
@@ -130,11 +131,15 @@ public class GameManager : MonoBehaviour
         {
             paperSFX[0].Play();
             messagePanel.SetActive(true);
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
         }
         else
         {
             paperSFX[1].Play();
             messagePanel.SetActive(false);
+            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 
