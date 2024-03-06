@@ -24,7 +24,7 @@ public class Boss : MonoBehaviour
     bool takingStep;
     bool fightWithPlayer;
 
-    float bossHealth = 1000;
+    float bossHealth = 800;
     float attackType = 0;
     float rangedAttackType = 2;
 

@@ -115,6 +115,7 @@ public class Monsters : MonoBehaviour
             monsterAnim.SetTrigger("Dead");
             monsterDead = true;
 
+            FindAnyObjectByType<GameManager>().monstersList.Remove(this.gameObject);
             Destroy(gameObject, 3f);
         }
     }

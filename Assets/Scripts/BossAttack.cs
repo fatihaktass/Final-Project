@@ -22,7 +22,7 @@ public class BossAttack : MonoBehaviour
     {
         if (other.CompareTag("Player") && bossScript.AttackValueSender() == true && damagePerm)
         {
-            other.GetComponent<PlayerController>().DamageReceived(Random.Range(5, 10));
+            other.GetComponent<PlayerController>().DamageReceived(Random.Range(10, 20));
             damagePerm = false;
         }
     }

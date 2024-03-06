@@ -5,10 +5,7 @@ using UnityEngine;
 public class FinishedGame : MonoBehaviour
 {
     [SerializeField] GameObject finalPanel, playerHealth;
-    public bool deadMonsters;
     GameManager gameManager;
-
-    public List<GameObject> MonstersInHieararchy;
 
     private void Start()
     {
@@ -16,17 +13,9 @@ public class FinishedGame : MonoBehaviour
         StopCoroutine(Finish());
     }
 
-    private void Update()
-    {
-        if(MonstersInHieararchy.Count == 0)
-        {
-            deadMonsters = true;
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && deadMonsters)
+        if (other.CompareTag("Player") && gameManager.monstersList.Count == 0)
         {
             playerHealth.SetActive(false);
             finalPanel.GetComponentInParent<Animator>().SetTrigger("Finished");

@@ -1543,6 +1543,7 @@ MonoBehaviour:
   attackZone: 0
   rangedAttackZone: 0
   playerSpotted: 0
+  rangedIn: 0
   playerLayer:
     serializedVersion: 2
     m_Bits: 64

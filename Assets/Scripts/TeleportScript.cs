@@ -18,6 +18,8 @@ public class TeleportScript : MonoBehaviour
             tpTimer += .3f;
             gameManager.Teleporting(true, tpTimer);
 
+            FindAnyObjectByType<PlayerController>().HealthBoost(tpTimer);
+
             if (tpTimer > 100f)
             {
                 tpTimer = 100f;

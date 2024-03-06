@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,7 +13,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI interactTMP;
     [SerializeField] GameObject[] cameras;
     [SerializeField] GameObject escMenu, escMenuButtons, settings;
-    [SerializeField] TextMeshProUGUI tpText;
     [SerializeField] GameObject teleportObj;
 
     [SerializeField] AudioSource[] paperSFX;
@@ -23,7 +23,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] Slider bossHealthSlider, playerHealthSlider;
     [SerializeField] TextMeshProUGUI sensivityValueText, sfxVolumeText, musicVolumeText;
 
+    public TextMeshProUGUI tpText;
     bool escMenuOpen = false;
+    public List<GameObject> monstersList;
 
     PlayerController playerController;
     MouseInput mouseInput;

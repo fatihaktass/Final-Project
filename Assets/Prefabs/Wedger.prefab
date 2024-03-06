@@ -871,6 +871,7 @@ MonoBehaviour:
   - {fileID: 5329417748976342990}
   - {fileID: 2434860423078616411}
   attackSpeed: 1.4
+  monsterHealth: 100
 --- !u!4 &5382150877623848722 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f7258f4a8b112644780f66cff07896fb,

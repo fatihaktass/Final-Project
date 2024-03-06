@@ -1,13 +1,12 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class ValueScript : MonoBehaviour
 {
-    float sfxVolume;
-    float musicVolume;
-    float sensivityValue;
+    float sfxVolume = 0.5f;
+    float musicVolume = 0.5f;
+    float sensivityValue = 1000f;
 
-    void Start()
+    void Awake()
     {
         if (PlayerPrefs.HasKey("SFXVolume"))
         {
@@ -15,8 +14,7 @@ public class ValueScript : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetFloat("SFXVolume", 0.3f);
-            sfxVolume = 0.3f;
+            PlayerPrefs.SetFloat("SFXVolume", sfxVolume);
         }
 
         if (PlayerPrefs.HasKey("MusicVolume"))
@@ -25,8 +23,7 @@ public class ValueScript : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetFloat("MusicVolume", 0.3f);
-            musicVolume = 0.3f;
+            PlayerPrefs.SetFloat("MusicVolume", musicVolume);
         }
 
         if (PlayerPrefs.HasKey("MouseSensivity"))
@@ -35,8 +32,7 @@ public class ValueScript : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetFloat("MouseSensivity", 500f);
-            sensivityValue = 500f;
+            PlayerPrefs.SetFloat("MouseSensivity", sensivityValue);
         }
     }
 

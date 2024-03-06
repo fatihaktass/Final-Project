@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,8 +15,9 @@ public class PlayerController : MonoBehaviour
     float footstepSpeed;
 
     [SerializeField] AudioSource[] footstepsSFX;
-    [SerializeField] AudioSource jumpSFX;
+    [SerializeField] AudioSource jumpSFX, hurtSFX;
     [SerializeField] GameObject swordInHand;
+    [SerializeField] CanvasGroup damageScreen;
     [SerializeField] float jumpForce;
     [SerializeField] float gravity;
     [SerializeField] float groundCheckerRadius;
@@ -55,6 +57,7 @@ public class PlayerController : MonoBehaviour
             PlayerAttacking();
             Jump();
         }
+        DamageScreen();
         Gravity();
     }
 
@@ -181,11 +184,21 @@ public class PlayerController : MonoBehaviour
     {
         playerHealth -= amountOfDamage;
         gameManager.PlayerHealthUpdater(playerHealth);
+        damageScreen.alpha = 1;
+        hurtSFX.Play();
 
         if (playerHealth < 0)
         {
             playerHealth = 0;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+    void DamageScreen()
+    {
+        if (damageScreen.alpha > 0)
+        {
+            damageScreen.alpha -= 0.01f;
         }
     }
 
@@ -202,5 +215,19 @@ public class PlayerController : MonoBehaviour
             swordInHand.SetActive(false);
         }
 
+    }
+
+    public void HealthBoost(float boost)
+    {
+        if (boost >= playerHealth)
+        {
+            playerHealth = boost;
+            gameManager.PlayerHealthUpdater(playerHealth);
+        }
+
+        if (playerHealth > 100)
+        {
+            playerHealth = 100;
+        }
     }
 }

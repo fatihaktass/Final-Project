@@ -15,9 +15,26 @@ public class DoorTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gameManager.CameraChanger(true);
-            boss.GoingRageSide();
-            Destroy(gameObject);
+            if (gameManager.monstersList.Count == 0)
+            {
+                gameManager.CameraChanger(true);
+                boss.GoingRageSide();
+                FindAnyObjectByType<PlayerController>().HealthBoost(50f);
+                Destroy(gameObject);
+            }
+            else
+            {
+                gameManager.tpText.gameObject.SetActive(true);
+                gameManager.tpText.text = "ONCE KOYU DUSMANLARDAN ARINDIR!";
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            gameManager.tpText.gameObject.SetActive(false);
         }
     }
 
