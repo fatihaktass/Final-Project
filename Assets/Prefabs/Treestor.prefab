@@ -179,7 +179,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -490,7 +490,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -672,37 +672,37 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: fb5c1f69b3013f345bb1ab33930a4cf7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 253.94437
+      value: 242.06
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb5c1f69b3013f345bb1ab33930a4cf7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 101.66741
+      value: 9.93
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb5c1f69b3013f345bb1ab33930a4cf7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 266.52606
+      value: 292.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb5c1f69b3013f345bb1ab33930a4cf7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9714834
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb5c1f69b3013f345bb1ab33930a4cf7,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb5c1f69b3013f345bb1ab33930a4cf7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.23710775
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb5c1f69b3013f345bb1ab33930a4cf7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb5c1f69b3013f345bb1ab33930a4cf7,
         type: 3}
@@ -712,7 +712,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: fb5c1f69b3013f345bb1ab33930a4cf7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -27.432
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb5c1f69b3013f345bb1ab33930a4cf7,
         type: 3}
@@ -870,7 +870,7 @@ MonoBehaviour:
   stepSFX:
   - {fileID: 219694746489757869}
   - {fileID: 7778909941744093050}
-  attackSpeed: 1.5
+  attackSpeed: 1.6
   monsterHealth: 100
 --- !u!4 &7733540825147343596 stripped
 Transform:

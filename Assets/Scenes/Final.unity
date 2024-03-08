@@ -480,6 +480,16 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 650942518}
+    - target: {fileID: 394263757153254879, guid: c3bfe42c65da15b47af6b0e90d001a85,
+        type: 3}
+      propertyPath: monsterHealth
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003681660835301907, guid: c3bfe42c65da15b47af6b0e90d001a85,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1226531361087651671, guid: c3bfe42c65da15b47af6b0e90d001a85,
         type: 3}
       propertyPath: m_Name
@@ -563,6 +573,11 @@ PrefabInstance:
     - target: {fileID: 4779213642459035519, guid: c3bfe42c65da15b47af6b0e90d001a85,
         type: 3}
       propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293198694858166004, guid: c3bfe42c65da15b47af6b0e90d001a85,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -11327,6 +11342,16 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 650942518}
+    - target: {fileID: 394263757153254879, guid: c3bfe42c65da15b47af6b0e90d001a85,
+        type: 3}
+      propertyPath: monsterHealth
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003681660835301907, guid: c3bfe42c65da15b47af6b0e90d001a85,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1226531361087651671, guid: c3bfe42c65da15b47af6b0e90d001a85,
         type: 3}
       propertyPath: m_Name
@@ -11410,6 +11435,11 @@ PrefabInstance:
     - target: {fileID: 4779213642459035519, guid: c3bfe42c65da15b47af6b0e90d001a85,
         type: 3}
       propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293198694858166004, guid: c3bfe42c65da15b47af6b0e90d001a85,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

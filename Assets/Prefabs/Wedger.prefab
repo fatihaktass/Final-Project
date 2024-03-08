@@ -268,7 +268,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -618,7 +618,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -677,37 +677,37 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f7258f4a8b112644780f66cff07896fb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 250.55
+      value: 316.33
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7258f4a8b112644780f66cff07896fb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 101.87106
+      value: 9.95
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7258f4a8b112644780f66cff07896fb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 266.92
+      value: 345.82
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7258f4a8b112644780f66cff07896fb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9203375
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7258f4a8b112644780f66cff07896fb,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7258f4a8b112644780f66cff07896fb,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.3911252
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7258f4a8b112644780f66cff07896fb,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7258f4a8b112644780f66cff07896fb,
         type: 3}
@@ -717,7 +717,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f7258f4a8b112644780f66cff07896fb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 46.049
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7258f4a8b112644780f66cff07896fb,
         type: 3}
@@ -811,7 +811,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -870,7 +870,7 @@ MonoBehaviour:
   stepSFX:
   - {fileID: 5329417748976342990}
   - {fileID: 2434860423078616411}
-  attackSpeed: 1.4
+  attackSpeed: 1.6
   monsterHealth: 100
 --- !u!4 &5382150877623848722 stripped
 Transform:

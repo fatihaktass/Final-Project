@@ -17,9 +17,11 @@ public class Monsters : MonoBehaviour
     bool monsterDead;
     bool isAttacking;
     bool takingStep;
+    public bool isBabyMonster;
 
     public float monsterHealth = 100;
     float attackStyle;
+    float attackRange;
 
     int monsterAttackIndex;
     int monsterStepIndex;
@@ -31,6 +33,15 @@ public class Monsters : MonoBehaviour
     {
         monsterAgent = GetComponent<NavMeshAgent>();
         monsterAnim = GetComponent<Animator>();
+
+        if (isBabyMonster)
+        {
+            attackRange = 2f;
+        }
+        else
+        {
+            attackRange = 2.75f;
+        }
     }
 
     private void Update()
@@ -43,8 +54,8 @@ public class Monsters : MonoBehaviour
 
     private void MonstersActions()
     {
-        fieldOfView = Physics.CheckSphere(transform.position, 40f, playerLayer);
-        attackZone = Physics.CheckSphere(transform.position, 3f, playerLayer);
+        fieldOfView = Physics.CheckSphere(transform.position, 45f, playerLayer);
+        attackZone = Physics.CheckSphere(transform.position, attackRange, playerLayer);
 
         Vector3 playerTransform = new(Player.position.x, transform.position.y, Player.position.z);
 

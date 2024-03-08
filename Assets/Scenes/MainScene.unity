@@ -6716,7 +6716,12 @@ PrefabInstance:
     - target: {fileID: 2868205605540555893, guid: e1aea80a97c11e747b27f773126ef229,
         type: 3}
       propertyPath: m_Speed
-      value: 4
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2868205605540555893, guid: e1aea80a97c11e747b27f773126ef229,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5374976560498305367, guid: e1aea80a97c11e747b27f773126ef229,
         type: 3}
@@ -6727,6 +6732,11 @@ PrefabInstance:
         type: 3}
       propertyPath: attackSpeed
       value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374976560498305367, guid: e1aea80a97c11e747b27f773126ef229,
+        type: 3}
+      propertyPath: isBabyMonster
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10339,7 +10349,12 @@ PrefabInstance:
     - target: {fileID: 2868205605540555893, guid: e1aea80a97c11e747b27f773126ef229,
         type: 3}
       propertyPath: m_Speed
-      value: 4
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2868205605540555893, guid: e1aea80a97c11e747b27f773126ef229,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5374976560498305367, guid: e1aea80a97c11e747b27f773126ef229,
         type: 3}
@@ -10348,8 +10363,8 @@ PrefabInstance:
       objectReference: {fileID: 1114051452}
     - target: {fileID: 5374976560498305367, guid: e1aea80a97c11e747b27f773126ef229,
         type: 3}
-      propertyPath: attackSpeed
-      value: 1.6
+      propertyPath: isBabyMonster
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19224,6 +19239,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2095267241}
     m_Modifications:
+    - target: {fileID: 4004441481966388159, guid: b3a191e957ba3b04e8bc0ff90d65657e,
+        type: 3}
+      propertyPath: m_Speed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5803955550115615879, guid: b3a191e957ba3b04e8bc0ff90d65657e,
         type: 3}
       propertyPath: Player
@@ -19233,6 +19253,16 @@ PrefabInstance:
         type: 3}
       propertyPath: attackSpeed
       value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5803955550115615879, guid: b3a191e957ba3b04e8bc0ff90d65657e,
+        type: 3}
+      propertyPath: isBabyMonster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5803955550115615879, guid: b3a191e957ba3b04e8bc0ff90d65657e,
+        type: 3}
+      propertyPath: monsterHealth
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6924529362898507862, guid: b3a191e957ba3b04e8bc0ff90d65657e,
         type: 3}
@@ -37941,7 +37971,12 @@ PrefabInstance:
     - target: {fileID: 2868205605540555893, guid: e1aea80a97c11e747b27f773126ef229,
         type: 3}
       propertyPath: m_Speed
-      value: 4
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2868205605540555893, guid: e1aea80a97c11e747b27f773126ef229,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5374976560498305367, guid: e1aea80a97c11e747b27f773126ef229,
         type: 3}
@@ -37952,6 +37987,11 @@ PrefabInstance:
         type: 3}
       propertyPath: attackSpeed
       value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374976560498305367, guid: e1aea80a97c11e747b27f773126ef229,
+        type: 3}
+      propertyPath: isBabyMonster
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -38038,6 +38078,16 @@ PrefabInstance:
       propertyPath: attackSpeed
       value: 1.6
       objectReference: {fileID: 0}
+    - target: {fileID: 829460433867889601, guid: 077e90de91a5005488c353e3c17d2f9b,
+        type: 3}
+      propertyPath: isBabyMonster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 829460433867889601, guid: 077e90de91a5005488c353e3c17d2f9b,
+        type: 3}
+      propertyPath: monsterHealth
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 4754373050670241192, guid: 077e90de91a5005488c353e3c17d2f9b,
         type: 3}
       propertyPath: m_Name
@@ -38096,7 +38146,12 @@ PrefabInstance:
     - target: {fileID: 8174809483243975349, guid: 077e90de91a5005488c353e3c17d2f9b,
         type: 3}
       propertyPath: m_Speed
-      value: 5
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8174809483243975349, guid: 077e90de91a5005488c353e3c17d2f9b,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39213,7 +39268,12 @@ PrefabInstance:
     - target: {fileID: 2868205605540555893, guid: e1aea80a97c11e747b27f773126ef229,
         type: 3}
       propertyPath: m_Speed
-      value: 4
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2868205605540555893, guid: e1aea80a97c11e747b27f773126ef229,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5374976560498305367, guid: e1aea80a97c11e747b27f773126ef229,
         type: 3}
@@ -39224,6 +39284,11 @@ PrefabInstance:
         type: 3}
       propertyPath: attackSpeed
       value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374976560498305367, guid: e1aea80a97c11e747b27f773126ef229,
+        type: 3}
+      propertyPath: isBabyMonster
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46276,8 +46341,13 @@ PrefabInstance:
       objectReference: {fileID: 1114051452}
     - target: {fileID: 829460433867889601, guid: 077e90de91a5005488c353e3c17d2f9b,
         type: 3}
-      propertyPath: attackSpeed
-      value: 1.6
+      propertyPath: isBabyMonster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 829460433867889601, guid: 077e90de91a5005488c353e3c17d2f9b,
+        type: 3}
+      propertyPath: monsterHealth
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 4754373050670241192, guid: 077e90de91a5005488c353e3c17d2f9b,
         type: 3}
@@ -46337,7 +46407,12 @@ PrefabInstance:
     - target: {fileID: 8174809483243975349, guid: 077e90de91a5005488c353e3c17d2f9b,
         type: 3}
       propertyPath: m_Speed
-      value: 5
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8174809483243975349, guid: 077e90de91a5005488c353e3c17d2f9b,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -47096,6 +47171,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2095267241}
     m_Modifications:
+    - target: {fileID: 4004441481966388159, guid: b3a191e957ba3b04e8bc0ff90d65657e,
+        type: 3}
+      propertyPath: m_Speed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5803955550115615879, guid: b3a191e957ba3b04e8bc0ff90d65657e,
         type: 3}
       propertyPath: Player
@@ -47103,8 +47183,13 @@ PrefabInstance:
       objectReference: {fileID: 1114051452}
     - target: {fileID: 5803955550115615879, guid: b3a191e957ba3b04e8bc0ff90d65657e,
         type: 3}
-      propertyPath: attackSpeed
-      value: 1.6
+      propertyPath: isBabyMonster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5803955550115615879, guid: b3a191e957ba3b04e8bc0ff90d65657e,
+        type: 3}
+      propertyPath: monsterHealth
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6924529362898507862, guid: b3a191e957ba3b04e8bc0ff90d65657e,
         type: 3}
